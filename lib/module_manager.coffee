@@ -13,3 +13,6 @@ class window.ModuleManager
   get: (moduleName) ->
     (return m if m.name is moduleName) for m in @_modules
     null
+
+  clear: () ->
+  	@_modules = []
