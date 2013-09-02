@@ -51,3 +51,15 @@ describe "ModuleManager", ->
 
     it 'return null when module not exists', ->
       expect(@subject.get('two')).toEqual(null)
+
+  describe '#clear', ->
+    beforeEach ->
+      @subject = new window.ModuleManager()
+      @subject.add(new FakeModule('one'))
+      @subject.add(new FakeModule('two'))
+
+    it 'execute remove method on all modules and remove clear modules collection', ->
+      expect(@subject._modules.length).toEqual(2)
+      @subject.clear()
+
+      expect(@subject._modules.length).toEqual(0)

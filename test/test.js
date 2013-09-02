@@ -54,7 +54,7 @@
         return expect(this.subject._modules.length).toEqual(1);
       });
     });
-    return describe('#get', function() {
+    describe('#get', function() {
       beforeEach(function() {
         this.subject = new window.ModuleManager();
         this.fakeModule = new FakeModule('one');
@@ -65,6 +65,18 @@
       });
       return it('return null when module not exists', function() {
         return expect(this.subject.get('two')).toEqual(null);
+      });
+    });
+    return describe('#clear', function() {
+      beforeEach(function() {
+        this.subject = new window.ModuleManager();
+        this.subject.add(new FakeModule('one'));
+        return this.subject.add(new FakeModule('two'));
+      });
+      return it('execute remove method on all modules and remove clear modules collection', function() {
+        expect(this.subject._modules.length).toEqual(2);
+        this.subject.clear();
+        return expect(this.subject._modules.length).toEqual(0);
       });
     });
   });
