@@ -84,7 +84,8 @@
         this.subject = new window.ModuleManager();
         this.fakeModuleOne = new FakeModule('one');
         this.fakeModuleTwo = new FakeModule('two');
-        return this.subject.add(this.fakeModule);
+        this.subject.add(this.fakeModuleOne);
+        return this.subject.add(this.fakeModuleTwo);
       });
       return it('remove module by name', function() {
         expect(this.subject._modules.length).toEqual(2);

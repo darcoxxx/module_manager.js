@@ -69,7 +69,8 @@ describe "ModuleManager", ->
       @subject = new window.ModuleManager()
       @fakeModuleOne = new FakeModule('one')
       @fakeModuleTwo = new FakeModule('two')
-      @subject.add(@fakeModule)
+      @subject.add(@fakeModuleOne)
+      @subject.add(@fakeModuleTwo)
 
     it 'remove module by name', ->
       expect(@subject._modules.length).toEqual(2)
