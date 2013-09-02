@@ -4,3 +4,6 @@ class window.ModuleManager
   _modules: []
   constructor: ->
     @_modules = []
+
+  add: (module) ->
+    @_modules.push module

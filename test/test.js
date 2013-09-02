@@ -23,8 +23,36 @@
     it('#name is ModuleManager', function() {
       return expect(this.subject.name).toEqual('ModuleManager');
     });
-    return it('#_modules array of modules, empty at initialization', function() {
+    it('#_modules array of modules, empty at initialization', function() {
       return expect(this.subject._modules).toEqual([]);
+    });
+    return describe("#add", function() {
+      var FakeModule;
+      FakeModule = (function() {
+        function FakeModule(name) {
+          this.name = name;
+        }
+
+        return FakeModule;
+
+      })();
+      it('add new module', function() {
+        var moduleOne;
+        moduleOne = new FakeModule("one");
+        expect(this.subject._modules.length).toEqual(0);
+        this.subject.add(moduleOne);
+        return expect(this.subject._modules[0]).toEqual(moduleOne);
+      });
+      return it('not add module when was added before', function() {
+        var moduleOne;
+        moduleOne = new FakeModule("one");
+        expect(this.subject._modules.length).toEqual(0);
+        this.subject.add(moduleOne);
+        expect(this.subject._modules.length).toEqual(1);
+        expect(this.subject._modules[0]).toEqual(moduleOne);
+        this.subject.add(moduleOne);
+        return expect(this.subject._modules.length).toEqual(1);
+      });
     });
   });
 
