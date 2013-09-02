@@ -63,3 +63,17 @@ describe "ModuleManager", ->
       @subject.clear()
 
       expect(@subject._modules.length).toEqual(0)
+  
+  describe '#remove', ->
+    beforeEach ->
+      @subject = new window.ModuleManager()
+      @fakeModuleOne = new FakeModule('one')
+      @fakeModuleTwo = new FakeModule('two')
+      @subject.add(@fakeModule)
+
+    it 'remove module by name', ->
+      expect(@subject._modules.length).toEqual(2)
+      @subject.remove(@fakeModuleTwo.name)
+
+      expect(@subject._modules.length).toEqual(1)
+      expect(@subject._modules[0].name).toEqual('one')

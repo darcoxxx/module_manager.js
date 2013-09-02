@@ -16,3 +16,6 @@ class window.ModuleManager
 
   clear: () ->
   	@_modules = []
+
+#find index of module by name | should be in method name _getIndex
+#remove element from array by method splice | should be in method remove

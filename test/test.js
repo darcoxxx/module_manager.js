@@ -67,7 +67,7 @@
         return expect(this.subject.get('two')).toEqual(null);
       });
     });
-    return describe('#clear', function() {
+    describe('#clear', function() {
       beforeEach(function() {
         this.subject = new window.ModuleManager();
         this.subject.add(new FakeModule('one'));
@@ -77,6 +77,20 @@
         expect(this.subject._modules.length).toEqual(2);
         this.subject.clear();
         return expect(this.subject._modules.length).toEqual(0);
+      });
+    });
+    return describe('#remove', function() {
+      beforeEach(function() {
+        this.subject = new window.ModuleManager();
+        this.fakeModuleOne = new FakeModule('one');
+        this.fakeModuleTwo = new FakeModule('two');
+        return this.subject.add(this.fakeModule);
+      });
+      return it('remove module by name', function() {
+        expect(this.subject._modules.length).toEqual(2);
+        this.subject.remove(this.fakeModuleTwo.name);
+        expect(this.subject._modules.length).toEqual(1);
+        return expect(this.subject._modules[0].name).toEqual('one');
       });
     });
   });
