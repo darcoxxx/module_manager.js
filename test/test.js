@@ -17,8 +17,14 @@
     beforeEach(function() {
       return this.subject = new window.ModuleManager();
     });
-    return it('version is 1.0.0', function() {
+    it('#version is 1.0.0', function() {
       return expect(this.subject.version).toEqual('1.0.0');
+    });
+    it('#name is ModuleManager', function() {
+      return expect(this.subject.name).toEqual('ModuleManager');
+    });
+    return it('#_modules array of modules, empty at initialization', function() {
+      return expect(this.subject._modules).toEqual([]);
     });
   });
 
