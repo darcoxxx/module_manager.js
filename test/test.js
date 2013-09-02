@@ -14,6 +14,15 @@
   });
 
   describe("ModuleManager", function() {
+    var FakeModule;
+    FakeModule = (function() {
+      function FakeModule(name) {
+        this.name = name;
+      }
+
+      return FakeModule;
+
+    })();
     beforeEach(function() {
       return this.subject = new window.ModuleManager();
     });
@@ -26,16 +35,7 @@
     it('#_modules array of modules, empty at initialization', function() {
       return expect(this.subject._modules).toEqual([]);
     });
-    return describe("#add", function() {
-      var FakeModule;
-      FakeModule = (function() {
-        function FakeModule(name) {
-          this.name = name;
-        }
-
-        return FakeModule;
-
-      })();
+    describe("#add", function() {
       it('add new module', function() {
         var moduleOne;
         moduleOne = new FakeModule("one");
@@ -52,6 +52,19 @@
         expect(this.subject._modules[0]).toEqual(moduleOne);
         this.subject.add(moduleOne);
         return expect(this.subject._modules.length).toEqual(1);
+      });
+    });
+    return describe('#get', function() {
+      beforeEach(function() {
+        this.subject = new window.ModuleManager();
+        this.fakeModule = new FakeModule('one');
+        return this.subject._modules.push(this.fakeModule);
+      });
+      it('return module by name', function() {
+        return expect(this.subject.get('one')).toEqual(this.fakeModule);
+      });
+      return it('return null when module not exists', function() {
+        return expect(this.subject.get('two')).toEqual(null);
       });
     });
   });

@@ -8,6 +8,8 @@ class window.ModuleManager
   add: (module) ->
     @_modules.push module unless @isPresent(module.name)
 
-  isPresent: (moduleName) -> 
+  isPresent: (moduleName) -> @get(moduleName) isnt null
+
+  get: (moduleName) ->
     (return m if m.name is moduleName) for m in @_modules
     null

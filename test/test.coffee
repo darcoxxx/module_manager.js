@@ -6,6 +6,9 @@ describe "Self test", ->
   it "is ok", -> expect(true).toBe(true)
 
 describe "ModuleManager", ->
+  class FakeModule
+    constructor: (@name) ->  
+
   beforeEach ->
     @subject = new window.ModuleManager()
   
@@ -19,8 +22,6 @@ describe "ModuleManager", ->
     expect(@subject._modules).toEqual([])
 
   describe "#add", ->
-    class FakeModule
-      constructor: (@name) ->
 
     it 'add new module', ->
       moduleOne = new FakeModule("one")
@@ -38,3 +39,15 @@ describe "ModuleManager", ->
 
       @subject.add(moduleOne)
       expect(@subject._modules.length).toEqual(1)
+  
+  describe '#get', ->
+    beforeEach ->
+      @subject = new window.ModuleManager()
+      @fakeModule = new FakeModule('one')
+      @subject._modules.push @fakeModule
+
+    it 'return module by name', ->
+      expect(@subject.get('one')).toEqual(@fakeModule)
+
+    it 'return null when module not exists', ->
+      expect(@subject.get('two')).toEqual(null)
